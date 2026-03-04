@@ -1,3 +1,6 @@
+import SimpleLightbox from "simplelightbox";
+
+import "simplelightbox/dist/simple-lightbox.min.css";
 const gallery = document.querySelector('.gallery');
 const images = [
     {
@@ -86,22 +89,7 @@ function itemsTemplate(arr) {
 
 gallery.innerHTML = itemsTemplate(images);
 
-gallery.addEventListener('click', onGalleryClick);
-
-function onGalleryClick(event) {
-    event.preventDefault();
-
-    const image = event.target;
-
-    if (!image.classList.contains('gallery-image')) {
-        return;
-    }
-
-    const largeImageURL = image.dataset.source;
-
-    const instance = basicLightbox.create(`
-  <img src="${largeImageURL}" width="1280" height="720">
-`);
-
-    instance.show();
-}
+const lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+});
